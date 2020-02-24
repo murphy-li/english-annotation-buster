@@ -12,6 +12,18 @@
 
 ![](img/after.png)
 
+## 机翻不准确
+
+如果遇到效果图这样的机翻不准确，甚至让人啼笑皆非，请尝试以下命令将googletrans更新到最新版本，googletrans作者一般会及时更新
+
+``````bash
+pip uninstall googletrans
+git clone git@github.com:ssut/py-googletrans.git
+cd ./py-googletrans && python setup.py install 
+``````
+
+
+
 ## 运行环境
 
 - Python 3.6+
