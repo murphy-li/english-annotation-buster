@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import html
 def before_trans(waiting_trans):
     """

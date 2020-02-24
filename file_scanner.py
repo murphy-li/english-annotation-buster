@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 
@@ -12,7 +13,13 @@ def scan_directory(directory, logging=False, source_format={'java'}):
     res = []
     for relative_path in os.listdir(directory):
         absolute_path = directory + "\\" +relative_path
+        # 忽略隐藏文件
         if relative_path.startswith("."):
+            if logging:
+                print("忽略文件夹/文件：", directory + "\\" + relative_path)
+            continue
+        # 忽略测试文件
+        if "\\src\\test\\" in absolute_path:
             if logging:
                 print("忽略文件夹/文件：", directory + "\\" + relative_path)
             continue
