@@ -1,10 +1,11 @@
 import os
 
 
-def scan_directory(directory, source_format={'java'}):
+def scan_directory(directory, logging=False, source_format={'java'}):
     """
     扫描文件夹下所有文件并返回符合source_format格式的文件
     :param directory:
+    :param logging: 是否打印日志
     :param source_format:
     :return:
     """
@@ -12,7 +13,8 @@ def scan_directory(directory, source_format={'java'}):
     for relative_path in os.listdir(directory):
         absolute_path = directory + "\\" +relative_path
         if relative_path.startswith("."):
-            print("忽略文件夹/文件：", directory + "\\" + relative_path)
+            if logging:
+                print("忽略文件夹/文件：", directory + "\\" + relative_path)
             continue
         if os.path.isfile(absolute_path):
             try:
