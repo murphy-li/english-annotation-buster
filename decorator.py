@@ -4,7 +4,8 @@ def before_trans(waiting_trans):
     :param waiting_trans: 待翻译队列
     :return:
     """
-    return waiting_trans.replace('/*', ' ').replace('*/', ' ').replace('*', ' ')
+    return waiting_trans.replace('/*', ' ').replace('*/', ' ').replace('*', ' ')\
+        .replace('&quot;', '"').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>') # HTML 转义字符处理，Google翻译遇到转义字符会报错
 
 
 def after(trans_res, space_content):
