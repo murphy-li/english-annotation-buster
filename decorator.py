@@ -1,11 +1,13 @@
+import html
 def before_trans(waiting_trans):
     """
     在翻译之前将没必要注释符（/**, * , */）删除
     :param waiting_trans: 待翻译队列
     :return:
     """
-    return waiting_trans.replace('/*', ' ').replace('*/', ' ').replace('*', ' ')\
-        .replace('&quot;', '"').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>') # HTML 转义字符处理，Google翻译遇到转义字符会报错
+    no_annotation = waiting_trans.replace('/*', ' ').replace('*/', ' ').replace('*', ' ')
+    # HTML 转义字符处理，Google翻译遇到转义字符会报错
+    return html.unescape(no_annotation)
 
 
 def after(trans_res, space_content):

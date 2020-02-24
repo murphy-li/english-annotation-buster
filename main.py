@@ -59,16 +59,17 @@ def i_am_buster(source_dir):
     for file_name in files:
         # 去除source_dir，使得显示更加舒适
         short_file_name = file_name[len(source_dir):]
-        print("开始翻译：" + short_file_name)
         lines = file_util.read_file(file_name)
         if len(lines) != 0 and lines[0].startswith(head):
             print("跳过对文件", short_file_name, "的翻译。")
             continue
+        print("开始翻译：" + short_file_name)
         trans_result = trans(lines)
         trans_result = head + trans_result
         file_util.write_back(trans_result, file_name)
         print("完成对 " + short_file_name + " 的翻译")
         time.sleep(1)
+
 
 def print_usage():
     """
@@ -86,4 +87,3 @@ if __name__ == "__main__":
         exit()
     code_path = sys.argv[1]
     i_am_buster(code_path)
-    i_am_buster(r"C:\Users\17326\Desktop\source\learning\spring-framework-master")

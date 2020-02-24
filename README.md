@@ -1,16 +1,39 @@
-# english-annotation-buster
+# 英语注释自动翻译助手
 
-一个将 Java 源码中的文档注释翻译为中文的工具（使用 Google 翻译）
+[![license](https://img.shields.io/badge/license-Apache%20License%202.0-brightgreen.svg?style=flat)](https://github.com/murphy-li/Clipboard2Voice/blob/master/LICENSE)<a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg"></a>
 
-## Requirement
+## 简介
 
-使用本工具，需安装 Python 3.6 或更新版本。
+本项目主要用于帮助大家查看源代码时将烦人的英语自动机翻为中文（使用谷歌翻译），暂时只支持Java注释：```/***/```，其他的注释如```//```或者其他语言暂时未兼容。
 
-该工具依赖 [googletrans](https://pypi.org/project/googletrans/) 包，可通过以下方法安装
+效果图如下：
+
+![](img/before.png)
+
+![](img/after.png)
+
+## 运行环境
+
+- Python 3.6+
+
+- googletrans 2.4.0+
 
 ```bash
-pip install googletrans
+pip install googletrans -i https://pypi.doubanio.com/simple/
 ```
 
-## Usage
+## 使用方法
 
+```bash
+python3 main.py project_root_dir
+```
+
+## 贡献者
+
+- murphy-li
+
+- Downstream1998
+
+## License
+
+本软件使用[![license](https://img.shields.io/badge/license-Apache%20License%202.0-brightgreen.svg?style=flat)](https://github.com/murphy-li/Clipboard2Voice/blob/master/LICENSE). 看这里[LICENSE](LICENSE) 获取更多细节。
