@@ -28,6 +28,16 @@ pip install googletrans -i https://pypi.doubanio.com/simple/
 python3 main.py project_root_dir
 ```
 
+## 待完善
+- 其他注释支持
+
+- 想用正则匹配注释，但是匹配了怎么替换文本？
+
+- ~~python多线程令人头痛~~
+
+- 每个注释发起一个翻译请求，一个请求握手挥手就很多次，非常浪费资源
+
+
 ## 贡献者
 
 - murphy-li
