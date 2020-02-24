@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from translater import translate
 from file_scanner import scan_directory
 import decorator
@@ -46,7 +47,7 @@ def trans(lines):
                 try:
                     trans_res = translate(deco)
                     # 添加翻译结果
-                    trans_result += decorator.after(trans_res, space_content)
+                    trans_result += decorator.after(trans_res, space_content).encode('utf-8').decode('utf-8')
                 except json.decoder.JSONDecodeError as e:
                     print("翻译内容是：")
                     print(deco)
@@ -87,7 +88,7 @@ def i_am_buster(source_dir):
         # 翻译结果加上头部，用于错误快速恢复
         trans_result = head + trans(lines)
         file_util.write_back(trans_result, file_name)
-        time.sleep(2)
+        time.sleep(10)
 
 
 def print_usage():
