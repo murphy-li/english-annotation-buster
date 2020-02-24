@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def write_back(text, file_name):
     """
     将翻译结果写回文件
