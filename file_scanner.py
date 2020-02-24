@@ -21,7 +21,8 @@ def scan_directory(directory, source_format={'java'}):
         if os.path.isdir(absolute_path):
             sub_res = scan_directory(absolute_path)
             if len(sub_res) is not 0:
-                res.append(sub_res)
+                for file in sub_res:
+                    res.append(file)
     return res
 
 
