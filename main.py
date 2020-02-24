@@ -1,19 +1,22 @@
 from translater import translate
 from file_scanner import scan_directory
 import decorator
+import file_util
 
 
-def read_trans_file(file_name):
+def trans(lines):
     """
     读取和翻译文件
     :param file_name: 文件名
     :return:
     """
     trans_result = ""
-    file = open(file_name, 'r', encoding='utf-8')
     # TODO 字符串是否是不可改变的？
     waiting_trans = ""
-    for line in file.readlines():
+    string = ""
+    for line in lines:
+        string += line
+    for line in lines:
         # TODO 改成正则匹配
         if line.lstrip().startswith('*') or line.lstrip().startswith('/*') or line.lstrip().startswith('*/'):
             # 添加当前行
@@ -36,23 +39,21 @@ def read_trans_file(file_name):
     return trans_result
 
 
-def write_back(text, file_name):
+def i_am_buster(source_dir):
+    # TODO 错误恢复，翻译到一半挂了恢复
+    # TODO 文件太多，多进程翻译（貌似python多线程就是个渣渣）
     """
-    将翻译结果写回文件
-    :param text: 翻译结果
-    :param file: 文件路径
+
+    :param source_dir: 项目文件夹
     :return:
     """
-    file = open(file_name, 'w', encoding='utf-8')
-    file.writelines(text)
-
-
-def i_am_buster(source_dir):
     files = scan_directory(source_dir)
     for file_name in files:
-        trans_result = read_trans_file(file_name)
-        print(trans_result)
-        write_back(trans_result, file_name)
+        print("开始翻译：" + file_name)
+        lines = file_util.read_file(file_name)
+        trans_result = trans(lines)
+        file_util.write_back(trans_result, file_name)
+        print("完成对 " + file_name + " 的翻译")
 
 
 if __name__ == "__main__":

@@ -15,9 +15,12 @@ def scan_directory(directory, source_format={'java'}):
             print("忽略文件夹/文件：", directory + "\\" + relative_path)
             continue
         if os.path.isfile(absolute_path):
-            filename, format = relative_path.split('.')
-            if format in source_format:
-                res.append(absolute_path)
+            try:
+                filename, file_format = relative_path.split('.')
+                if file_format in source_format:
+                    res.append(absolute_path)
+            except ValueError:
+                pass
         if os.path.isdir(absolute_path):
             sub_res = scan_directory(absolute_path)
             if len(sub_res) is not 0:
