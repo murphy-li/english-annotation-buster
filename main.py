@@ -4,6 +4,7 @@ import decorator
 import file_util
 import time
 import sys
+import json
 
 
 def trans(lines):
@@ -28,9 +29,16 @@ def trans(lines):
                 space_index = waiting_trans.index('/')
                 space_content = waiting_trans[0:space_index]
                 deco = decorator.before_trans(waiting_trans)
-                trans_res = translate(deco)
-                # 添加翻译结果
-                trans_result += decorator.after(trans_res, space_content)
+                # 添加异常处理是为了定位异常来源
+                try:
+                    trans_res = translate(deco)
+                    # 添加翻译结果
+                    trans_result += decorator.after(trans_res, space_content)
+                except json.decoder.JSONDecodeError as e:
+                    print("翻译内容是：")
+                    print(deco)
+                    raise e
+
             # 添加不用翻译的当前行
             trans_result += line
             # 待翻译置为空
@@ -49,15 +57,17 @@ def i_am_buster(source_dir):
     """
     files = scan_directory(source_dir)
     for file_name in files:
-        print("开始翻译：" + file_name)
+        # 去除source_dir，使得显示更加舒适
+        short_file_name = file_name[len(source_dir):]
+        print("开始翻译：" + short_file_name)
         lines = file_util.read_file(file_name)
         if len(lines) != 0 and lines[0].startswith(head):
-            print("跳过对文件", file_name, "的翻译。")
+            print("跳过对文件", short_file_name, "的翻译。")
             continue
         trans_result = trans(lines)
         trans_result = head + trans_result
         file_util.write_back(trans_result, file_name)
-        print("完成对 " + file_name + " 的翻译")
+        print("完成对 " + short_file_name + " 的翻译")
         time.sleep(1)
 
 def print_usage():
@@ -76,5 +86,4 @@ if __name__ == "__main__":
         exit()
     code_path = sys.argv[1]
     i_am_buster(code_path)
-        
-    i_am_buster(r"C:\Users\17326\Desktop\source\learning\ffff")
+    i_am_buster(r"C:\Users\17326\Desktop\source\learning\spring-framework-master")
