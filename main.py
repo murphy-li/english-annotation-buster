@@ -3,6 +3,7 @@ from file_scanner import scan_directory
 import decorator
 import file_util
 import time
+import sys
 import json
 
 
@@ -23,7 +24,7 @@ def trans(lines):
             waiting_trans += line
         else:
             # 查询翻译结果
-            if len(waiting_trans) is not 0:
+            if len(waiting_trans) != 0:
                 # 查看第一行注释开头的空格数, 因为有可能是\t制表符
                 space_index = waiting_trans.index('/')
                 space_content = waiting_trans[0:space_index]
@@ -69,6 +70,20 @@ def i_am_buster(source_dir):
         print("完成对 " + short_file_name + " 的翻译")
         time.sleep(1)
 
+def print_usage():
+    """
+    打印使用信息
+    """
+    print('Usage: python main.py [path to your java source folder]')
+    print('\nExamples:')
+    print('\tpython main.py C:\\path\\to\\your\\java\\source\\folder')
+    print('\tpython main.py /home/user/path/to/your/java/source/folder')
 
 if __name__ == "__main__":
+    # 添加对命令行的解析，如果目前用不着可以先注释它
+    if len(sys.argv) < 2:
+        print_usage()
+        exit()
+    code_path = sys.argv[1]
+    i_am_buster(code_path)
     i_am_buster(r"C:\Users\17326\Desktop\source\learning\spring-framework-master")
