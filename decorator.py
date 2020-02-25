@@ -1,51 +1,31 @@
 # -*- coding: utf-8 -*-
 import html
-import  re
 
 
-def before_trans(waiting_trans):
+def before(waiting_trans):
     """
     在翻译之前将没必要注释符（/**, * , */）删除
     :param waiting_trans: 待翻译队列
-    :return:
+    :return: 将注释代码处理为正常语句
     """
-    no_annotation = waiting_trans.strip().replace('/*', ' ').replace('*/', ' ').\
-        replace('*', ' ').replace("\n", ' ').replace("\t", ' ')
-    res = ""
-    # before 如果为0，则为不可见字符（回车，制表符，空格等），为1则为可见字符
-    last = ''
-    for char in no_annotation:
-        if char == ' ':
-            if last == ' ':
-                continue
-            elif last == '.' or last == ',' or last == ';':
-                res += ' '
-                last = ' '
-            else:
-                res += char
-                last = char
-        else:
-            res += char
-            last = char
+    # 写暴力一点他不香吗？？
+    # 保留回车符，去掉/*，*，*/，制表符，两个、三个、四个空字符转换为一个
+    res = waiting_trans.strip().replace('/*', ' ').replace('*/', ' '). \
+        replace('*', ' ').replace("\t", ' ').replace("    ", ' ').replace("   ", ' ').replace("  ", ' ')
     # HTML 转义字符处理，Google翻译遇到转义字符会报错
     return html.unescape(res)
 
 
-def after(trans_res, space_content):
+def after(trans_result, indent):
     """
     在翻译之后将注释加上必要的注释符（/**, * , */）
-    :param trans_res:
-    :param space_content:
-    :return:
+    :param trans_result: 翻译结果
+    :param indent: 缩进
+    :return: 处理翻译结果之后的注释代码
     """
-    res = space_content + "/** \n" + space_content + " * " + trans_res
-    res = res.replace('，', '，\n' + space_content + ' * ')
-    res = res.replace('。', '。 \n' + space_content + ' * ')
-    res = res.replace('！', '！ \n' + space_content + ' * ')
-    res = res.replace('；', '； \n' + space_content + ' * ')
-    # res = head_line
-    # for row in re.split('[，。！；]', trans_res):
-    #     index = trans_res.rfind(row) + len(row)
-    #     res = res + space_content + " * " + row + trans_res[index] +  '\n'
-    res = res + space_content + ' */\n'
+    trans_result = trans_result.replace('@ ', '@')
+    res = indent + '/**\n'
+    for line in trans_result.split('\n'):
+        res = res + indent + ' * ' + line + '\n'
+    res = res + indent + ' */'
     return res
