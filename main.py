@@ -1,30 +1,10 @@
 # -*- coding: utf-8 -*-
-from translater import translate
 from file_scanner import scan_directory
-import decorator
 import file_util
 import time
 import sys
 from tqdm import tqdm
-
-
-def trans(string):
-    """
-    对当前字符串进行翻译
-    :param string: 待翻译的字符串
-    :return:  翻译结果
-    """
-    # 如果待翻译为空，返回空
-    if len(string.strip()) == 0:
-        return ""
-    # 查看第一行注释缩进的索引
-    space_index = string.index('/')
-    # 获得缩进，因为缩进可能是制表符，所以直接保存缩进字符
-    space_content = string[0:space_index]
-    # 翻译修饰之后的字符串
-    trans_res = translate(decorator.before(string))
-    # 添加修饰之后的翻译结果
-    return decorator.after(trans_res, space_content)
+from translater import translate
 
 
 def resolve(lines):
@@ -44,11 +24,22 @@ def resolve(lines):
         # 无论是否需要翻译，将原文添加到结果中
         trans_result += line
         string += line
-        # 匹配是否为注释，匹配注释前面的空字符
+        # 匹配是否为/*xxxxx*/，匹配注释前面的空白字符
         res = re.findall(r"([\t| ]*/\*[\s\S]*?\*/)", string)
         if len(res) == 1:
-            trans_result += trans(res[0])
+            trans_result += translate(res[0])
             string = ""
+        # 匹配当前行是否为 //
+        # 只匹配当前行貌似会有问题，出现
+        # /**
+        # //
+        # */
+        # 将会出现错误，虽然肯定不会有人这么写，但为了严谨些，关闭匹配//
+        # else:
+        #     line_res = re.findall(r"^[\s]*// .*$", line)
+        #     if len(line_res) == 1:
+        #         trans_result += trans(line_res[0])
+        #         string = ""
     return trans_result
 
 
