@@ -11,7 +11,7 @@ def before(waiting_trans):
     # 写暴力一点他不香吗？？
     # 保留回车符，去掉/*，*，*/，制表符，两个、三个、四个空字符转换为一个
     res = waiting_trans.strip().replace('/*', ' ').replace('*/', ' '). \
-        replace('*', ' ').replace("\t", ' ').replace("    ", ' ').replace("   ", ' ').replace("  ", ' ')
+        replace('*', ' ').replace("\t", ' ').replace("    ", ' ').replace("   ", ' ').replace("  ", ' ').replace("&#64;", '@').replace("&#064;", '@')
     # HTML 转义字符处理，Google翻译遇到转义字符会报错
     return html.unescape(res)
 
@@ -27,5 +27,6 @@ def after(trans_result, indent):
     res = indent + '/**\n'
     for line in trans_result.split('\n'):
         res = res + indent + ' * ' + line + '\n'
-    res = res + indent + ' */'
+    res = res + indent + ' */\n'
+    res = res.replace("批注", "注解")
     return res
