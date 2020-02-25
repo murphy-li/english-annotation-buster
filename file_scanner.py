@@ -12,7 +12,7 @@ def scan_directory(directory, logging=False, source_format={'java'}):
     """
     res = []
     for relative_path in os.listdir(directory):
-        absolute_path = directory + "\\" +relative_path
+        absolute_path = directory + "\\" + relative_path
         # 忽略隐藏文件
         if relative_path.startswith("."):
             if logging:
@@ -31,7 +31,7 @@ def scan_directory(directory, logging=False, source_format={'java'}):
             except ValueError:
                 pass
         if os.path.isdir(absolute_path):
-            sub_res = scan_directory(absolute_path)
+            sub_res = scan_directory(absolute_path, source_format=source_format)
             if len(sub_res) is not 0:
                 for file in sub_res:
                     res.append(file)

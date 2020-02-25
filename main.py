@@ -55,7 +55,7 @@ def buster_english(source_dir):
     :return:
     """
     # 扫描文件夹下所有文件
-    files = scan_directory(source_dir)
+    files = scan_directory(source_dir, source_format={'java', 'kt'})
     progress_iter = tqdm(files)
     for file_name in progress_iter:
         # 获得项目内的相对路径
