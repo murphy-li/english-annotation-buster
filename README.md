@@ -12,18 +12,6 @@
 
 ![](img/after.png)
 
-## 机翻不准确
-
-如果遇到效果图这样的机翻不准确，甚至让人啼笑皆非，请尝试以下命令将googletrans更新到最新版本，googletrans作者一般会及时更新
-
-``````bash
-pip uninstall googletrans
-git clone git@github.com:ssut/py-googletrans.git
-cd ./py-googletrans && python setup.py install 
-``````
-
-
-
 ## 运行环境
 
 - Python 3.6+
@@ -34,19 +22,26 @@ cd ./py-googletrans && python setup.py install
 pip install googletrans -i https://pypi.doubanio.com/simple/
 ```
 
+## 机翻不准确
+
+如果遇到效果图这样的机翻不准确，甚至让人啼笑皆非，请尝试以下命令将googletrans更新到最新版本，googletrans作者一般会及时更新
+
+``````bash
+pip uninstall googletrans
+git clone git@github.com:ssut/py-googletrans.git
+cd ./py-googletrans && python setup.py install 
+``````
+
 ## 使用方法
 
 ```bash
-python3 main.py project_root_dir
+python3 main.py project_root_dir # e.g python main.py C:\Users\Murphy|IdeaProjects\
 ```
 
 ## 待完善
 - 其他注释支持
-
-- 想用正则匹配注释，但是匹配了怎么替换文本？
-
+- ~~想用正则匹配注释，但是匹配了怎么替换文本？（已使用正则表达式）~~
 - ~~python多线程令人头痛~~
-
 - 每个注释发起一个翻译请求，一个请求握手挥手就很多次，非常浪费资源
 
 
@@ -58,4 +53,4 @@ python3 main.py project_root_dir
 
 ## License
 
-本软件使用[![license](https://img.shields.io/badge/license-Apache%20License%202.0-brightgreen.svg?style=flat)](https://github.com/murphy-li/Clipboard2Voice/blob/master/LICENSE). 看这里[LICENSE](LICENSE) 获取更多细节。
+[![license](https://img.shields.io/badge/license-Apache%20License%202.0-brightgreen.svg?style=flat)](https://github.com/murphy-li/Clipboard2Voice/blob/master/LICENSE). [点击这里](LICENSE) 获取更多细节。
