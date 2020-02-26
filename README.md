@@ -121,6 +121,10 @@ cd ./py-googletrans && python setup.py install
 python3 main.py project_root_dir # e.g python main.py C:\Users\Murphy|IdeaProjects\
 ```
 
+## 使用案例
+[spring-framework机翻](https://github.com/murphy-li/spring-framework)，这个源代码机翻会逐渐更新、完善。
+
+
 ## 待完善
 - 其他注释支持
 - ~~想用正则匹配注释，但是匹配了怎么替换文本？（已使用正则表达式）~~
