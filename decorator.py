@@ -43,10 +43,10 @@ def after(trans_result, indent):
     return res
 
 
-# 应该不翻译的集合，或许加引号无效
-at_set = ['@author', '@see', '@return', '@code', '@link', '@version', '@throws']
+# 不翻译的集合
+at_set = ['@author', '@see', '@return', '@code', '@link', '@version', '@throws', '@param']
 # 应该换行的集合
-enter_set = ['@return', '@see', '@throws']
+enter_set = ['@return', '@see', '@throws', '@param']
 def encode_at(string):
     """
     对部分@注解加引号，不让谷歌翻译尝试翻译

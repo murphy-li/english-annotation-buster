@@ -23,10 +23,11 @@ def translate(string, indent=None):
     string_before_trans = decorator.before(string)
     if len(string_before_trans) > 5000:
         # 匹配到 5000字左右 + 空行，递归处理
-        res = re.findall(r"([\s\S]{2000,4999})\n\s*?\n([\s\S]*)", string_before_trans)
+        res = re.findall(r"([\s\S]{2000,4999})\. ([\s\S]*)", string_before_trans)
         if len(res) == 1:
             return translate(res[0][0], indent=indent) + translate(res[0][1], indent=indent)
         else:
+            print(string_before_trans)
             print(len(res))
             raise SystemError("匹配结果错误")
     trans_res = __translate__(string_before_trans)
