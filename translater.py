@@ -21,6 +21,8 @@ def translate(string, indent=None):
         indent = string[0:space_index]
     # 翻译修饰之后的字符串
     string_before_trans = decorator.before(string)
+    if len(string_before_trans.strip()) == 0 or string_before_trans is None:
+        return ""
     if len(string_before_trans) > 5000:
         # 匹配到 5000字左右 + 空行，递归处理
         res = re.findall(r"([\s\S]{2000,4999})\. ([\s\S]*)", string_before_trans)
