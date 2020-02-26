@@ -126,13 +126,10 @@ python3 main.py project_root_dir # e.g python main.py C:\Users\Murphy|IdeaProjec
 - ~~想用正则匹配注释，但是匹配了怎么替换文本？（已使用正则表达式）~~
 - ~~python多线程令人头痛~~
 - 每个注释发起一个翻译请求，一个请求握手挥手就很多次，非常浪费资源
-- 注释中包含代码块，但是也被机翻了。```<pre class="code">code area</pre>```（参考上方代码效果）
+- 注释中包含代码块，但是也被机翻了。```<pre class="code">code area</pre>```（参考示例机翻中的代码效果：<pre class = code>类DebuggingInterceptor实现了......）
 
 ## 贡献者
-
-- murphy-li
-
-- Downstream1998
+[Contributors](https://github.com/murphy-li/english-annotation-buster/graphs/contributors)
 
 ## License
 
