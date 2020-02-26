@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from file_scanner import scan_directory
+from file_util import scan_directory
 import file_util
 import time
 import sys
